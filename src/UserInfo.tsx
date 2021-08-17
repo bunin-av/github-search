@@ -18,12 +18,14 @@ const UserInfo = ({
     const {login, avatar_url, followers} = userDetails || {}
 
     useEffect(() => {
-        setLoading(true)
-        if (activeUser) axios.get<TUser>(`https://api.github.com/users/${activeUser.login}`)
-            .then(r => {
-                setUserDetails(r.data)
+        if (activeUser) {
+            setLoading(true);
+            (async () => {
+                const {data} = await axios.get<TUser>(`https://api.github.com/users/${activeUser.login}`)
+                setUserDetails(data)
                 setLoading(false)
-            })
+            })()
+        }
     }, [activeUser])
 
     return (

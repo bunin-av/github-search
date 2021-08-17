@@ -15,12 +15,12 @@ const UsersList = ({searchValue, activeUser, setActiveUser, showUserInfo, setSho
     const [users, setUsers] = useState<TUser[] | null>([])
 
     useEffect(() => {
-        setLoading(true)
-        axios.get<{ items: TUser[] }>(`https://api.github.com/search/users?q=${searchValue}`)
-            .then(r => {
-                setUsers(r.data.items)
-                setLoading(false)
-            })
+        setLoading(true);
+        (async () => {
+            const {data: {items}} = await axios.get<{ items: TUser[] }>(`https://api.github.com/search/users?q=${searchValue}`)
+            setUsers(items)
+            setLoading(false)
+        })()
     }, [searchValue])
 
     useEffect(() => {
