@@ -11,7 +11,8 @@ const Input = ({searchValue, setSearchValue}: { searchValue: string, setSearchVa
                 type="text"
                 value={value}
                 onChange={(e) => setValue(e.currentTarget.value)}/>
-            <button onClick={() => setSearchValue(value)}>find</button>
+            <button onClick={() => setSearchValue(value)}>search</button>
+            <button onClick={() => setSearchValue('bunin')}>reset</button>
         </div>
     );
 };
